@@ -164,6 +164,20 @@ describe('CourseChecklist', () => {
         expect(listItems).toHaveLength(testChecklistData.length);
       });
 
+      it('the correct number of checks if certificates url is empty', () => {
+        const newProps = {
+          ...defaultProps,
+        };
+        newProps.studioDetails.links.certificates = '';
+
+        wrapper = shallowWithIntl(<CourseChecklist {...newProps} />);
+
+        const listItems = wrapper.find('[id^="checklist-item"]');
+        expect(listItems).toHaveLength(testChecklistData.length - 1);
+        const certificateCheck = wrapper.find('#checklist-item-certificate');
+        expect(certificateCheck).toHaveLength(0);
+      });
+
       testChecklistData.forEach((check) => {
         describe(`check with id '${check.id}'`, () => {
           wrapper = shallowWithIntl(<CourseChecklist {...defaultProps} />);

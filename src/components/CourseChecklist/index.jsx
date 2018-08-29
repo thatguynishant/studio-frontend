@@ -173,6 +173,11 @@ class CourseChecklist extends React.Component {
     this.state.checks.map((check) => {
       const isCompleted = this.isCheckCompleted(check.id);
       const shouldShowCommentSection = this.shouldShowCommentSection(check.id);
+      const shouldThisShowCheck = this.shouldShowCheck(check.id);
+
+      if (!shouldThisShowCheck) {
+        return null;
+      }
 
       return (
         <div
@@ -325,6 +330,13 @@ class CourseChecklist extends React.Component {
     }
 
     return false;
+  }
+
+  shouldShowCheck = (checkID) => {
+    if (checkID === 'certificates') {
+      return this.props.studioDetails.links.certificates.trim() !== '';
+    }
+    return true;
   }
 
   updateChecklistState(props) {
