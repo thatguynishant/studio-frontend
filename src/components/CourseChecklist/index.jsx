@@ -342,7 +342,7 @@ class CourseChecklist extends React.Component {
   updateChecklistState(props) {
     if (Object.keys(props.data).length > 0) {
       const checks = getFilteredChecklist(
-        props.dataList, props.data.is_self_paced);
+        props.dataList, props);
 
       const values = {};
       let totalCompletedChecks = 0;
